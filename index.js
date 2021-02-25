@@ -1,4 +1,2 @@
-const Employee
-const Intern
-const Manager
-const Engineer
+const fs = require("fs");
+const inquirer = require("inquirer");
