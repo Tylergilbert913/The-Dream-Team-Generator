@@ -47,6 +47,17 @@ inquirer
 </head>
 
 <body>
+    <style>
+        .row {
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    margin: 100px;
+}
+.card-header {
+    background-color: rgb(78, 128, 194);
+}
+    </style>
     <div class="row">
         <div class="card text-dark bg-light mb-3" style="max-width: 18rem;" text-align="center">
             <div class="card-header"></div>
@@ -95,6 +106,9 @@ inquirer
                 <p class="card-text"></p>
                 <p class="card-text"></p>
                 <p class="card-text"></p>
+
+
+                <script src="code.js"></script>
 </body>
 
 </html>
