@@ -8,13 +8,13 @@ describe("Engineer class", () => {
     const github = "GuilloryJamie";
     const engineer = new Engineer(name, id, email, github);
     
-    describe("getGithub", () => {
+    describe('getGithub', () => {
         it("Should returnthe engineers github username as a string", () => {
             expect(engineer.getGithub()).toEqual(github);
         });
     });
 
-    describe("getRole", () => {
+    describe('getRole', () => {
         it("Should return engineer as a string ", () => {
             expect(engineer.getRole()).toEqual("Engineer");
         });

@@ -9,14 +9,14 @@ describe("Manager class", () => {
     const manager = new Manager(name, id, email, officeNumber);
     
 
-    describe("getOfficeNumber", () => {
-        it("Should do something", () => {
+    describe('getOfficeNumber', () => {
+        it("Should return manager's office number as a string", () => {
             expect(manager.getOfficeNumber()).toEqual(officeNumber);
         });
     });
 
-    describe("getRole", () => {
-        it("Should do something", () => {
+    describe('getRole', () => {
+        it("Should return manager's role as as string", () => {
             expect(manager.getRole()).toEqual("Manager");
         });
     });

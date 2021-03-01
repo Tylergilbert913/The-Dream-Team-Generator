@@ -8,13 +8,13 @@ describe("Intern class", () => {
     const school = "UGA";
     const intern = new Intern(name, id, email, school);
 
-    describe("getSchool", () => {
+    describe('getSchool', () => {
         it("Should return the intern's school as a string", () => {
             expect(intern.getSchool()).toEqual(school);
         });
     });
 
-    describe("getRole", () => {
+    describe('getRole', () => {
         it("Should return the intern's role", () => {
             expect(intern.getOfficeNumber()).toEqual("Intern");
         });

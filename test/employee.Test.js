@@ -8,19 +8,19 @@ describe("Employee class", () => {
     const employee = new Employee(name, id, email);
 
 
-    describe("getName", () => {
+    describe('getName', () => {
         it("Should return the employee's name a string", () => {
              expect(employee.getName()).toEqual(name);
         });
     });
 
-    describe("getId", () => {
+    describe('getId', () => {
         it("Should return the employee's ID as a string", () => {
             expect(employee.getId()).toEqual(id);
         });
     });
 
-    describe("getEmail", () => {
+    describe('getEmail', () => {
         it("Should return the employee's email as a string", () => {
             expect(employee.getEmail()).toEqual(email);
         });
