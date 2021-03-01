@@ -9,13 +9,13 @@ describe("Intern class", () => {
     const intern = new Intern(name, id, email, school);
 
     describe("getSchool", () => {
-        it("Should do something", () => {
+        it("Should return the intern's school as a string", () => {
             expect(intern.getSchool()).toEqual(school);
         });
     });
 
     describe("getRole", () => {
-        it("Should do something", () => {
+        it("Should return the intern's role", () => {
             expect(intern.getOfficeNumber()).toEqual("Intern");
         });
     });
