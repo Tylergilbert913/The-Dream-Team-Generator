@@ -9,13 +9,13 @@ describe("Engineer class", () => {
     const engineer = new Engineer(name, id, email, github);
     
     describe("getGithub", () => {
-        it("Should do something", () => {
+        it("Should returnthe engineers github username as a string", () => {
             expect(engineer.getGithub()).toEqual(github);
         });
     });
 
     describe("getRole", () => {
-        it("Should do something", () => {
+        it("Should return engineer as a string ", () => {
             expect(engineer.getRole()).toEqual("Engineer");
         });
     });
