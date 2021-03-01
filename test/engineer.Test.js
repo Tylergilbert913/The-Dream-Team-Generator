@@ -2,21 +2,21 @@ const { describe, it, expect } = require("@jest/globals");
 const Engineer = require("./lib/engineer");
 
 describe("Engineer class", () => {
-    const name = "Darth";
-    const id = "987654";
-    const email = "darth@test.com";
-    const github = "darthvader";
-    const Engineer = new Engineer(name, id, email, github);
+    const name = "Jamie";
+    const id = "12345";
+    const email = "Jamie.g678@yahoo.com";
+    const github = "GuilloryJamie";
+    const engineer = new Engineer(name, id, email, github);
     
     describe("getGithub", () => {
         it("Should do something", () => {
-            expect(manager.getOfficeNumber()).toEqual(officeNumber);
+            expect(engineer.getGithub()).toEqual(github);
         });
     });
 
     describe("getRole", () => {
         it("Should do something", () => {
-            expect(manager.getOfficeNumber()).toEqual(officeNumber);
+            expect(engineer.getRole()).toEqual("Engineer");
         });
     });
 });

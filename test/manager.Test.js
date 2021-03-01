@@ -6,7 +6,7 @@ describe("Manager class", () => {
     const id = "456321";
     const email = "Rebecca.g8342@gmail.com";
     const officeNumber = 123421421423;
-    const Manager = new Manager(name, id, email, officeNumber);
+    const manager = new Manager(name, id, email, officeNumber);
     
 
     describe("getOfficeNumber", () => {
@@ -17,7 +17,7 @@ describe("Manager class", () => {
 
     describe("getRole", () => {
         it("Should do something", () => {
-            expect(manager.getOfficeNumber()).toEqual(officeNumber);
+            expect(manager.getRole()).toEqual("Manager");
         });
     });
 });

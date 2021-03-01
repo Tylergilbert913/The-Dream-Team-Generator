@@ -26,6 +26,11 @@ describe("Employee class", () => {
         });
     });
 
+    describe('getRole', () => {
+        it("should return a 'string' containing the employees 'role' provided at initialization", () => {
+            expect(employee.getRole()).toEqual("Employee");
+        });
+    });
 });
 
 
