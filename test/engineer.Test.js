@@ -1,27 +1,20 @@
 const { describe, it, expect } = require("@jest/globals");
 const engineer = require("./lib/engineer");
 
-describe("Employee class", () => {
+describe("Engineer class", () => {
     it("Should do something", () => {
    
     });
 
-    describe("getName", () => {
+    describe("getGithub", () => {
         it("Should do something", () => {
 
         });
     });
 
-    describe("getId", () => {
+    describe("getRole", () => {
         it("Should do something", () => {
 
         });
     });
-
-    describe("getEmail", () => {
-        it("Should do something", () => {
-
-        });
-    });
-
 });
