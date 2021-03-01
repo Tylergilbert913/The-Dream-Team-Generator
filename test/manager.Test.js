@@ -1,5 +1,5 @@
 const { describe, it, expect } = require("@jest/globals");
-const Manager = require("./lib/manager");
+const Manager = require("../lib/manager");
 
 describe("Manager class", () => {
     const name = "Rebecca";

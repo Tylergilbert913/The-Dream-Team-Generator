@@ -2,8 +2,8 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 const jest = require("jest");
 
-inquirer
-    .prompt([
+function initialPrompt() {
+    return inquirer.prompt([
         {
             type: 'input',
             message: 'What is your name?',
@@ -11,29 +11,65 @@ inquirer
         },
         {
             type: 'input',
-            message: 'Where are you located?',
-            name: 'location',
+            message: 'What is your employee ID?',
+            name: 'ID',
         },
         {
             type: 'input',
-            message: 'Short bio?',
-            name: 'bio',
+            message: 'What is your email?',
+            name: 'email',
         },
         {
             type: 'input',
-            message: 'Linkedin URL?',
-            name: 'linkedin',
+            message: 'What is your office number?',
+            name: 'officeNumber',
         },
-        {
-            type: 'input',
-            message: 'Github URL?',
-            name: 'github',
-        },
-    ]).then((response) =>
-        fs.writeFile(
-            `./dist/index.html`,
 
-            `
+    ]).then(function (managerPrompt) {
+        console.log(managerPrompt)
+        return addNewEmployee();
+    }
+
+        .catch(function (err) {
+            console.log(err);
+        });
+};
+
+}
+
+initialPrompt();
+
+function newEmployee() {
+    return inquirer.prompt([
+        {
+            type: "list",
+            message: "Pick your team:",
+            name: "pickedmember",
+            choice: ["engineer", "intern", "manager", "finish team"]
+        }
+    ]).then(response => {
+       console.log(response.pickedmember);
+       if (pickedmember == "engineer") {
+           return promptEngineer();
+       }
+       else if (response.pickedmember == "intern") {
+           return promptIntern();
+       }
+       else if (response.pickedmember == "manager") {
+           return promptManager();
+       }
+       else if (response.pickedmember == "finish team") {
+           return writeToFile("./dist/index.html");
+       }
+    }) 
+
+    
+}
+
+fs.writeFile(
+    `./dist/index.html`,
+
+    `
             <!DOCTYPE html>
 <html lang="en">
 
@@ -114,9 +150,9 @@ inquirer
 </html>
 `
 
-            ,
-            (err) => err ? console.log("There was an error!") : console.log("Successfully appended to file!")
+    ,
+    (err) => err ? console.log("There was an error!") : console.log("Successfully appended to file!")
 
 
-        )
+)
     );

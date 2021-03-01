@@ -1,5 +1,5 @@
 const { describe, it, expect } = require("@jest/globals");
-const Employee = require("./lib/employee");
+const Employee = require("../lib/employee");
 
 describe("Employee class", () => {
     const name = "Gilberto";
@@ -9,25 +9,25 @@ describe("Employee class", () => {
 
 
     describe("getName", () => {
-        it("Should do something", () => {
+        it("Should return the employee's name a string", () => {
              expect(employee.getName()).toEqual(name);
         });
     });
 
     describe("getId", () => {
-        it("Should do something", () => {
+        it("Should return the employee's ID as a string", () => {
             expect(employee.getId()).toEqual(id);
         });
     });
 
     describe("getEmail", () => {
-        it("Should do something", () => {
+        it("Should return the employee's email as a string", () => {
             expect(employee.getEmail()).toEqual(email);
         });
     });
 
     describe('getRole', () => {
-        it("should return a 'string' containing the employees 'role' provided at initialization", () => {
+        it("should return a the employee's role as a string", () => {
             expect(employee.getRole()).toEqual("Employee");
         });
     });
