@@ -16,7 +16,7 @@ describe("Intern class", () => {
 
     describe('getRole', () => {
         it("Should return the intern's role", () => {
-            expect(intern.getOfficeNumber()).toEqual("Intern");
+            expect(intern.getRole()).toEqual("Intern");
         });
     });
 

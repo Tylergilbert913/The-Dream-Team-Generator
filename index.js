@@ -75,6 +75,36 @@ function newEmployee() {
 
 }
 
+function promptManager() {
+    return inquirer.prompt([
+
+        {
+            type: "input",
+            message: "What is your Manager's Name?",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "What is your Manager's employee ID?",
+            name: "ID"
+        },
+        {
+            type: "input",
+            message: "What is your Manager's email?",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "What is your Manager's office number?",
+            name: "officenumber"
+        },
+    ]).then(managerInfo => {
+        html += Manager(managerInfo)
+        console.log(managerInfo);
+        addNewEmployee()
+    });
+}
+
 // fs.writeFile(
 //     `./dist/index.html`,
 
@@ -165,3 +195,20 @@ function newEmployee() {
 
 // )
 //     );
+
+function writeToFile(fileName, response) { 
+    fs.writeFile(fileName, response, err => err ? console.error(err) : console.log('Success!'));
+}
+
+// TODO: Create a function to initialize app
+function init() { 
+    inquirer
+        .prompt(questions)
+        .then((response) => {
+            const contents = generateMarkdown(response);
+            writeToFile("", contents);
+        });
+}
+
+// Function call to initialize app
+init();
