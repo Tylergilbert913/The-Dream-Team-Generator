@@ -9,6 +9,10 @@ https://opensource.org/licenses/MIT
 This template was created for the user to input information, using the terminal, then the information given wil render into different cards, depending on wether you're an Intern or and Engineer.
 
 Also, I was not able to get this working. I tried so many differnet routes, but in the end, I was unsuccesful. I was able to complete all my test succesfully, though.
+
+This is a link to a video showing my Team-Profile-Generator:
+
+https://drive.google.com/file/d/1f-24NygM_1GW_matVSJ1O5Rp4cEkhjlr/view
     
 ## Table of Contents
     
