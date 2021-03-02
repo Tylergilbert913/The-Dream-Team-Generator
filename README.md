@@ -26,11 +26,11 @@ NPM install
     
 ## Usage Information 
     
-The user will answer all questions accordingly. This willthen  determine which prompts they will be presented with and what will populate within the cards.
+The user will answer all questions accordingly. This will then determine which prompts they will be presented with and what will populate within the cards.
     
 ## Contributors 
     
-NONE
+Alaina Hicks
     
 ## Testing Instructions 
     

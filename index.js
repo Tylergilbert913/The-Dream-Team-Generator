@@ -56,7 +56,9 @@ function newEmployee() {
             name: "pickedmember",
             choice: ["engineer", "intern", "manager", "finish team"]
         }
-    ]).then(response => {
+    ])
+    
+    .then(response => {
         console.log(response.pickedmember);
         if (pickedmember == "engineer") {
             return promptEngineer();
@@ -81,22 +83,82 @@ function promptManager() {
         {
             type: "input",
             message: "What is your Manager's Name?",
-            name: "name"
+            name: "nameM"
         },
         {
             type: "input",
             message: "What is your Manager's employee ID?",
-            name: "ID"
+            name: "IDM"
         },
         {
             type: "input",
             message: "What is your Manager's email?",
-            name: "email"
+            name: "emailM"
         },
         {
             type: "input",
             message: "What is your Manager's office number?",
-            name: "officenumber"
+            name: "officenumberM"
+        },
+    ]).then(managerInfo => {
+        html += Manager(managerInfo)
+        console.log(managerInfo);
+        addNewEmployee()
+    });
+}
+
+function promptIntern() {
+    return inquirer.prompt([
+
+        {
+            type: "input",
+            message: "What is your intern's name?",
+            name: "nameI"
+        },
+        {
+            type: "input",
+            message: "What is your intern's's employee ID?",
+            name: "IDI"
+        },
+        {
+            type: "input",
+            message: "What is your intern's email?",
+            name: "emailI"
+        },
+        {
+            type: "input",
+            message: "Where does your intern go to school?",
+            name: "school"
+        },
+    ]).then(managerInfo => {
+        html += Manager(managerInfo)
+        console.log(managerInfo);
+        addNewEmployee()
+    });
+}
+
+function promptEngineer() {
+    return inquirer.prompt([
+
+        {
+            type: "input",
+            message: "What is your engineer's name?",
+            name: "nameE"
+        },
+        {
+            type: "input",
+            message: "What is your engineer's employee ID?",
+            name: "IDE"
+        },
+        {
+            type: "input",
+            message: "What is your engineer's email?",
+            name: "emailE"
+        },
+        {
+            type: "input",
+            message: "What is your engineer's github username?",
+            name: "githubE"
         },
     ]).then(managerInfo => {
         html += Manager(managerInfo)
@@ -196,19 +258,19 @@ function promptManager() {
 // )
 //     );
 
-function writeToFile(fileName, response) { 
-    fs.writeFile(fileName, response, err => err ? console.error(err) : console.log('Success!'));
-}
+// function writeToFile(fileName, response) { 
+//     fs.writeFile(fileName, response, err => err ? console.error(err) : console.log('Success!'));
+// }
 
-// TODO: Create a function to initialize app
-function init() { 
-    inquirer
-        .prompt(questions)
-        .then((response) => {
-            const contents = generateMarkdown(response);
-            writeToFile("", contents);
-        });
-}
+// // TODO: Create a function to initialize app
+// function init() { 
+//     inquirer
+//         .prompt(questions)
+//         .then((response) => {
+//             const contents = generateMarkdown(response);
+//             writeToFile("", contents);
+//         });
+// }
 
-// Function call to initialize app
-init();
+// // Function call to initialize app
+// init();
