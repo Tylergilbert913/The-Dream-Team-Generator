@@ -6,7 +6,9 @@ https://opensource.org/licenses/MIT
     
 ## Description 
     
-This template was created for the user to input information, using the terminal, then the information given wil render into different cards, depending on wether you're an Intern or and Engineer. 
+This template was created for the user to input information, using the terminal, then the information given wil render into different cards, depending on wether you're an Intern or and Engineer.
+
+Also, I was not able to get this working. I tried so many differnet routes, but in the end, I was unsuccesful. I was able to complete all my test succesfully, though.
     
 ## Table of Contents
     
