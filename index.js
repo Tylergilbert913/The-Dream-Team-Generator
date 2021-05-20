@@ -1,293 +1,282 @@
-const fs = require("fs");
+const fs = require("fs")
 const inquirer = require("inquirer");
-// const util = require("util");
-// const writeFileAsync = util.promisify(fs.writeFile);
+const util = require("util"); //Util import for writeFileAsync
+const writeFileAsync = util.promisify(fs.writeFile); // For async function
 
-// imported classes
-const Employee = require("./lib/employee");
-const Engineer = require("./lib/engineer");
-const Intern = require("./lib/intern");
-const Manager = require("./lib/manager");
-
-let employeeArray = [];
+// All of the Classes to be used later
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 
 
-// Creates a function to write README file
-function writeToFile(filename) {
-    fs.writeFile(filename, openhtml += html += closehtml, function (err) {
+// Function that initiates upon node being run
+async function init() {
 
-        if (err) {
-            return console.log(err);
-        }
+    let teamProfileTemplate = "";
 
-        console.log("Success!");
+    // Global variables
+    let employeeName;
+    let id;
+    let email;
+    let officeNum;
+    let github;
+    let school;
 
-    });
-}
-// creates function for inital prompt for the manager
-function initialPrompt() {
-    return inquirer.prompt([
-        {
-            type: 'input',
-            message: 'What is your name?',
-            name: 'name',
-        },
-        {
-            type: 'input',
-            message: 'What is your employee ID?',
-            name: 'ID',
-        },
-        {
-            type: 'input',
-            message: 'What is your email?',
-            name: 'email',
-        },
-        {
-            type: 'input',
-            message: 'What is your office number?',
-            name: 'officeNumber',
-        },
-
-    ])
+    // Function that calls the initial inquirer.prompt
+    await inquirer.prompt([
+            {
+                type: "list",
+                message: "Welcome to Team Profile Generator! Select the 'Manager' role to continue.",
+                name: 'role',
+                choices: ['Manager']
+            },
+            {
+                type: 'input',
+                message: "Please enter the team manager's full name.",
+                name: 'employeeName',
+                validate: (answer) => {
+                    valid = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/.test(answer)
+                    if (!valid) {
+                        return console.log(" *Name input cannot contain any numbers or symbols. Try again.*")
+                    }
+                    return true;
+                }
+            },
+            {
+                type: 'input',
+                message: 'Please enter the team manager\'s id number.',
+                name: 'id',
+                validate: (answer) => {
+                    valid = /^[0-9]+$/.test(answer)
+                    if (!valid) {
+                        return console.log(" *Input must be a number. Try again.*")
+                    }
+                    return true;
+                }
+            },
+            {
+                type: 'input',
+                message: 'Please enter the team manager\'s email address.',
+                name: 'email',
+                default: () => {},
+                validate: function (email) {
+                    valid = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email)
     
-    .then(function (managerPrompt) {
-        console.log(managerPrompt)
-        return newEmployee();
-    })
+                    if (valid) {
+                        return true;
+                    } else {
+                       return console.log(" *Not a valid email address format. Try again.*");
+                    }
+                }
+            },
+            {
+                type: 'input',
+                message: "Please enter the team manager\'s office number.",
+                name: 'officeNum',
+                validate: (answer) => {
+                    if (isNaN(answer)) {
+                        return console.log(" *Input must be a number. Try again.*");
+                    }
+                     return true;
+                }                
+            }
+        ]).then((response) => {
+        
+            // Stores response variables
+            employeeName = response.employeeName;
+            id = response.id;
+            email = response.email;
+            role = response.role;
+            officeNum = response.officeNum;
 
-        .catch(function (err) {
-            console.log(err);
-        });
+            // Once finished, it creates a new Manager from the Manager class with responses as parameters
+            const manager = new Manager(employeeName, id, email, officeNum);
 
-    };
+            // Places the manager responses inside of the manager.html file
+            employeeTemplate = fs.readFileSync("./src/manager.html");
 
-    // calls initial pormpt function
-    initialPrompt();
+            // eval accesses the employeeTemplate's local variables and fills them in with responses.
+            teamProfileTemplate +="\n" + eval("`"+ employeeTemplate +"`");
+            console.log("Manager profile successfully created.")
 
-// created function for employee prompt
-function newEmployee() {
-    return inquirer.prompt([
-        {
-            type: "list",
-            message: "Pick your team:",
-            name: "pickedmember",
-            choice: ["engineer", "intern", "manager", "finish team"]
-        }
-    ])
+            // call the menu prompt to check if user wants to add more employees
+            return menuPrompt();
+        }).catch(err => console.log(err));
+        
+    // Prompt for the menu that will appear after completing each team member prompt
+    async function menuPrompt() {
+        await inquirer.prompt([
+            {
+                type: 'list',
+                message: 'Would you like to add an additional employee to your team profile?',
+                name: 'role',
+                choices: ["Engineer", "Intern", "Finished Building Team"]    
+            }
+        ]).then((menuAnswer) => {
+            
+            if (menuAnswer.role === "Engineer") {
+                console.log("Creating Engineer Profile...")
+                // Returns the engineer prompt questions
+                return addEngineerPrompt();
+            } else if (menuAnswer.role === "Intern") {
+                console.log("Creating Intern Profile...")
+                // Returns the intern prompt questions
+                return addInternPrompt();
+            } else {
+                return;
+            }
     
-    .then(response => {
-        console.log(response.pickedmember);
-        if (pickedmember == "engineer") {
-            return promptEngineer();
-        }
-        else if (response.pickedmember == "intern") {
-            return promptIntern();
-        }
-        else if (response.pickedmember == "manager") {
-            return promptManager();
-        }
-        else if (response.pickedmember == "finish team") {
-            return writeToFile("./dist/index.html");
-        }
-    })
+        }).catch(err => console.error(err));
+    }
 
+    // // // Variable that hold the questions and answers prompt for Addtional Employees
+    async function addEngineerPrompt() {
+        await inquirer.prompt([
+            {
+                type: 'input',
+                message: "What is the name of the employee you'd like to place in the team portal?",
+                name: 'employeeName',
+                validate: (answer) => {
+                    valid = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/.test(answer)
+                    if (!valid) {
+                        return console.log(" *Name input cannot contain any numbers or symbols. Try again.*")
+                    }
+                    return true;
+                }
+            },
+            {
+                type: 'input',
+                message: 'What is your employee\'s id number?',
+                name: 'id',
+                validate: (answer) => {
+                    valid = /^[0-9]+$/.test(answer)
+                    if (!valid) {
+                        return console.log(" *Input must be a number. Try again.*")
+                    }
+                    return true;
+                }
+            },
+            {
+                type: 'input',
+                message: 'What is your employee\'s email address?',
+                name: 'email',
+                default: () => {},
+                validate: function (email) {
+                    valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
+                    if (valid) {
+                        return true;
+                    } else {
+                        console.log("Please enter a valid email address.");
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                message: 'What is your engineer\'s GitHub username?',
+                name: 'github'
+            }
+        ]).then((response) => { //For engineer response handling
+            employeeName = response.employeeName;
+            id = response.id;
+            email = response.email;
+            role = response.role;
+            github = response.github;
+
+            // creates a new employee class with response answers.
+            let engineer = new Engineer(employeeName, id, email, github);
+
+            // Places the engineer responses inside of the engineer.html file
+            employeeTemplate = fs.readFileSync("./src/engineer.html");
+
+            teamProfileTemplate += "\n" + eval("`"+ employeeTemplate +"`")
+            console.log("Engineer profile successfully created.")
+
+            return menuPrompt();
+        })
+    }
+
+    async function addInternPrompt() {
+        await inquirer.prompt([
+            {
+                type: 'input',
+                message: "What is the name of the employee you'd like to place in the team portal?",
+                name: 'employeeName',
+                validate: (answer) => {
+                    valid = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/.test(answer)
+                    if (!valid) {
+                        return console.log(" *Name input cannot contain any numbers or symbols. Try again.*")
+                    }
+                    return true;
+                }
+            },
+            {
+                type: 'input',
+                message: 'What is your employee\'s id number?',
+                name: 'id',
+                validate: (answer) => {
+                    valid = /^[0-9]+$/.test(answer)
+                    if (!valid) {
+                        return console.log(" *Input must be a number. Try again.*")
+                    }
+                    return true;
+                }
+            },
+            {
+                type: 'input',
+                message: 'What is your employee\'s email address?',
+                name: 'email',
+                default: () => {},
+                validate: function (email) {
+                    valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+
+                    if (valid) {
+                        return true;
+                    } else {
+                        console.log("Please enter a valid email address.");
+                        return false;
+                    }
+                },
+                
+            },
+            {
+                type: 'input',
+                message: 'What school does your intern attend?',
+                name: 'school'
+            }
+        // response handler for Intern class and html
+        ]).then((response) => {
+
+            employeeName = response.employeeName;
+            id = response.id;
+            email = response.email;
+            role = response.role;
+            school = response.school;
+
+            // creates a new Intern class with response answers.
+            let intern = new Intern(employeeName, id, email, school);
+
+            // Places the intern responses inside of the intern.html file
+            employeeTemplate = fs.readFileSync("./src/intern.html");
+
+            teamProfileTemplate += eval("`"+ employeeTemplate +"`")
+            console.log("Intern profile successfully created.")
+
+            // Recall the menu prompt to see if user wants to add another team member
+            return menuPrompt();
+        }).catch(err => console.error(err));
+    }
+
+    // Reads generate.html and places the contents of the file in a variable
+    const generateFinalPage = fs.readFileSync("./src/generate.html");
+                        
+    // takes all of the team profiles that were created, and places them inside of generateFinalPage variable.
+    teamProfileTemplate = eval("`"+ generateFinalPage +"`");
+
+    // Writes all of the stored team profiles templates and their contents to a final html page.
+    writeFileAsync("./dist/index.html", teamProfileTemplate);
+    console.log("Team profile page successfully created!")
 }
-// creates function for managers prompt
-function promptManager() {
-    return inquirer.prompt([
 
-        {
-            type: "input",
-            message: "What is your Manager's Name?",
-            name: "nameM"
-        },
-        {
-            type: "input",
-            message: "What is your Manager's employee ID?",
-            name: "IDM"
-        },
-        {
-            type: "input",
-            message: "What is your Manager's email?",
-            name: "emailM"
-        },
-        {
-            type: "input",
-            message: "What is your Manager's office number?",
-            name: "officenumberM"
-        },
-    ]).then(managerInfo => {
-        html += Manager(managerInfo)
-        console.log(managerInfo);
-        addNewEmployee()
-    });
-}
-// creates funciton for intern prompt
-function promptIntern() {
-    return inquirer.prompt([
-
-        {
-            type: "input",
-            message: "What is your intern's name?",
-            name: "nameI"
-        },
-        {
-            type: "input",
-            message: "What is your intern's's employee ID?",
-            name: "IDI"
-        },
-        {
-            type: "input",
-            message: "What is your intern's email?",
-            name: "emailI"
-        },
-        {
-            type: "input",
-            message: "Where does your intern go to school?",
-            name: "school"
-        },
-    ]).then(managerInfo => {
-        html += Manager(managerInfo)
-        console.log(managerInfo);
-        addNewEmployee()
-    });
-}
-// creates function for engineer prompt
-function promptEngineer() {
-    return inquirer.prompt([
-
-        {
-            type: "input",
-            message: "What is your engineer's name?",
-            name: "nameE"
-        },
-        {
-            type: "input",
-            message: "What is your engineer's employee ID?",
-            name: "IDE"
-        },
-        {
-            type: "input",
-            message: "What is your engineer's email?",
-            name: "emailE"
-        },
-        {
-            type: "input",
-            message: "What is your engineer's github username?",
-            name: "githubE"
-        },
-    ]).then(managerInfo => {
-        html += Manager(managerInfo)
-        console.log(managerInfo);
-        addNewEmployee()
-    });
-}
-
-// fs.writeFile(
-//     `./dist/index.html`,
-
-//     `
-//             <!DOCTYPE html>
-// <html lang="en">
-
-// <head>
-//     <meta charset="UTF-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-//         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-//     <link rel="stylesheet" href="style.css">
-//     <title>Document</title>
-// </head>
-
-// <body>
-//     <style>
-//         .row {
-//     display: flex;
-//     justify-content: center;
-//     justify-content: space-evenly;
-//     margin: 100px;
-// }
-// .card-header {
-//     background-color: rgb(78, 128, 194);
-// }
-//     </style>
-//     <div class="row">
-//         <div class="card text-dark bg-light mb-3" style="max-width: 18rem;" text-align="center">
-//             <div class="card-header"></div>
-//             <div class="card-header"></div>
-//             <div class="card-body">
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-
-//             </div>
-//         </div>
-//         <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-//             <div class="card-header"></div>
-//             <div class="card-header"></div>
-//             <div class="card-body">
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//             </div>
-//         </div>
-//         <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-//             <div class="card-header"></div>
-//             <div class="card-header"></div>
-//             <div class="card-body">
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//             </div>
-//         </div>
-//     </div>
-
-//     <div class="row">
-//         <div class="card text-dark bg-light mb-3" style="max-width: 18rem;" text-align="center">
-//             <div class="card-header"></div>
-//             <div class="card-header"></div>
-//             <div class="card-body">
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//             </div>
-//         </div>
-//         <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-//             <div class="card-header"></div>
-//             <div class="card-header"></div>
-//             <div class="card-body">
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-//                 <p class="card-text"></p>
-
-
-//                 <script src="code.js"></script>
-// </body>
-
-// </html>
-// `
-
-//     ,
-//     (err) => err ? console.log("There was an error!") : console.log("Successfully appended to file!")
-
-
-// )
-//     );
-
-// function writeToFile(fileName, response) { 
-//     fs.writeFile(fileName, response, err => err ? console.error(err) : console.log('Success!'));
-// }
-
-// // TODO: Create a function to initialize app
-// function init() { 
-//     inquirer
-//         .prompt(questions)
-//         .then((response) => {
-//             const contents = generateMarkdown(response);
-//             writeToFile("", contents);
-//         });
-// }
-
-// // Function call to initialize app
-// init();
+init();
