@@ -1,20 +1,20 @@
 const fs = require("fs")
 const inquirer = require("inquirer");
-const util = require("util"); //Util import for writeFileAsync
-const writeFileAsync = util.promisify(fs.writeFile); // For async function
+const util = require("util");
+const writeFileAsync = util.promisify(fs.writeFile); 
 
-// All of the Classes to be used later
+
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
 
-// Function that initiates upon node being run
+
 async function init() {
 
     let teamProfileTemplate = "";
 
-    // Global variables
+    
     let employeeName;
     let id;
     let email;
@@ -22,7 +22,7 @@ async function init() {
     let github;
     let school;
 
-    // Function that calls the initial inquirer.prompt
+    
     await inquirer.prompt([
         {
             type: "list",
@@ -82,28 +82,28 @@ async function init() {
         }
     ]).then((response) => {
 
-        // Stores response variables
+       
         employeeName = response.employeeName;
         id = response.id;
         email = response.email;
         role = response.role;
         officeNum = response.officeNum;
 
-        // Once finished, it creates a new Manager from the Manager class with responses as parameters
+        
         const manager = new Manager(employeeName, id, email, officeNum);
 
-        // Places the manager responses inside of the manager.html file
+        
         employeeTemplate = fs.readFileSync("./templates/manager.html");
 
-        // eval accesses the employeeTemplate's local variables and fills them in with responses.
+        
         teamProfileTemplate += "\n" + eval("`" + employeeTemplate + "`");
         console.log("Manager profile successfully created.")
 
-        // call the menu prompt to check if user wants to add more employees
+        
         return menuPrompt();
     }).catch(err => console.log(err));
 
-    // Prompt for the menu that will appear after completing each team member prompt
+    
     async function menuPrompt() {
         await inquirer.prompt([
             {
@@ -116,11 +116,11 @@ async function init() {
 
             if (menuAnswer.role === "Engineer") {
                 console.log("Creating Engineer Profile...")
-                // Returns the engineer prompt questions
+                
                 return addEngineerPrompt();
             } else if (menuAnswer.role === "Intern") {
                 console.log("Creating Intern Profile...")
-                // Returns the intern prompt questions
+                
                 return addInternPrompt();
             } else {
                 return;
@@ -129,7 +129,7 @@ async function init() {
         }).catch(err => console.error(err));
     }
 
-    // // // Variable that hold the questions and answers prompt for Addtional Employees
+    
     async function addEngineerPrompt() {
         await inquirer.prompt([
             {
@@ -177,17 +177,17 @@ async function init() {
                 message: 'What is your engineer\'s GitHub username?',
                 name: 'github'
             }
-        ]).then((response) => { //For engineer response handling
+        ]).then((response) => { 
             employeeName = response.employeeName;
             id = response.id;
             email = response.email;
             role = response.role;
             github = response.github;
 
-            // creates a new employee class with response answers.
+            
             let engineer = new Engineer(employeeName, id, email, github);
 
-            // Places the engineer responses inside of the engineer.html file
+            
             employeeTemplate = fs.readFileSync("./templates/engineer.html");
 
             teamProfileTemplate += "\n" + eval("`" + employeeTemplate + "`")
@@ -245,7 +245,7 @@ async function init() {
                 message: 'What school does your intern attend?',
                 name: 'school'
             }
-            // response handler for Intern class and html
+            
         ]).then((response) => {
 
             employeeName = response.employeeName;
@@ -254,27 +254,27 @@ async function init() {
             role = response.role;
             school = response.school;
 
-            // creates a new Intern class with response answers.
+            
             let intern = new Intern(employeeName, id, email, school);
 
-            // Places the intern responses inside of the intern.html file
+            
             employeeTemplate = fs.readFileSync("./src/intern.html");
 
             teamProfileTemplate += eval("`" + employeeTemplate + "`")
             console.log("Intern profile successfully created.")
 
-            // Recall the menu prompt to see if user wants to add another team member
+            
             return menuPrompt();
         }).catch(err => console.error(err));
     }
 
-    // Reads generate.html and places the contents of the file in a variable
+   
     const generateFinalPage = fs.readFileSync("./templates/generate.html");
 
-    // takes all of the team profiles that were created, and places them inside of generateFinalPage variable.
+    
     teamProfileTemplate = eval("`" + generateFinalPage + "`");
 
-    // Writes all of the stored team profiles templates and their contents to a final html page.
+    
     writeFileAsync("./html/index.html", teamProfileTemplate);
     console.log("Team profile page successfully created!")
 }
