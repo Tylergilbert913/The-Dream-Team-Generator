@@ -4,9 +4,9 @@ const util = require("util"); //Util import for writeFileAsync
 const writeFileAsync = util.promisify(fs.writeFile); // For async function
 
 // All of the Classes to be used later
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
 
 
 // Function that initiates upon node being run
@@ -93,7 +93,7 @@ async function init() {
             const manager = new Manager(employeeName, id, email, officeNum);
 
             // Places the manager responses inside of the manager.html file
-            employeeTemplate = fs.readFileSync("./src/manager.html");
+            employeeTemplate = fs.readFileSync("./templates/manager.html");
 
             // eval accesses the employeeTemplate's local variables and fills them in with responses.
             teamProfileTemplate +="\n" + eval("`"+ employeeTemplate +"`");
@@ -188,7 +188,7 @@ async function init() {
             let engineer = new Engineer(employeeName, id, email, github);
 
             // Places the engineer responses inside of the engineer.html file
-            employeeTemplate = fs.readFileSync("./src/engineer.html");
+            employeeTemplate = fs.readFileSync("./templates/engineer.html");
 
             teamProfileTemplate += "\n" + eval("`"+ employeeTemplate +"`")
             console.log("Engineer profile successfully created.")
@@ -269,7 +269,7 @@ async function init() {
     }
 
     // Reads generate.html and places the contents of the file in a variable
-    const generateFinalPage = fs.readFileSync("./src/generate.html");
+    const generateFinalPage = fs.readFileSync("./templates/generate.html");
                         
     // takes all of the team profiles that were created, and places them inside of generateFinalPage variable.
     teamProfileTemplate = eval("`"+ generateFinalPage +"`");
