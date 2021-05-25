@@ -33,52 +33,22 @@ async function init() {
         {
             type: 'input',
             message: "Please enter the team manager's full name.",
-            name: 'employee',
-            // validate: (answer) => {
-            //     valid = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/.test(answer)
-            //     if (!valid) {
-            //         return console.log(" *Name input cannot contain any numbers or symbols. Try again.*")
-            //     }
-            //     return true;
-            // }
+            name: 'employee'
         },
         {
             type: 'input',
             message: 'Please enter the team manager\'s id number.',
-            name: 'id',
-            // validate: (answer) => {
-            //     valid = /^[0-9]+$/.test(answer)
-            //     if (!valid) {
-            //         return console.log(" *Input must be a number. Try again.*")
-            //     }
-            //     return true;
-            // }
+            name: 'id'  
         },
         {
             type: 'input',
             message: 'Please enter the team manager\'s email address.',
-            name: 'email',
-            // default: () => { },
-            // validate: function (email) {
-            //     valid = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email)
-
-            //     if (valid) {
-            //         return true;
-            //     } else {
-            //         return console.log(" *Not a valid email address format. Try again.*");
-            //     }
-            // }
+            name: 'email'  
         },
         {
             type: 'input',
             message: "Please enter the team manager\'s office number.",
-            name: 'officeNum',
-            // validate: (answer) => {
-            //     if (isNaN(answer)) {
-            //         return console.log(" *Input must be a number. Try again.*");
-            //     }
-            //     return true;
-            // }
+            name: 'officeNum'  
         }
     ]).then((response) => {
 
@@ -135,42 +105,17 @@ async function init() {
             {
                 type: 'input',
                 message: "What is the name of the employee you'd like to place in the team portal?",
-                name: 'employeeName',
-                // validate: (answer) => {
-                //     valid = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/.test(answer)
-                //     if (!valid) {
-                //         return console.log(" *Name input cannot contain any numbers or symbols. Try again.*")
-                //     }
-                //     return true;
-                // }
+                name: 'employeeName'    
             },
             {
                 type: 'input',
                 message: 'What is your employee\'s id number?',
-                name: 'id',
-                // validate: (answer) => {
-                //     valid = /^[0-9]+$/.test(answer)
-                //     if (!valid) {
-                //         return console.log(" *Input must be a number. Try again.*")
-                //     }
-                //     return true;
-                // }
+                name: 'id' 
             },
             {
                 type: 'input',
                 message: 'What is your employee\'s email address?',
-                name: 'email',
-                // default: () => { },
-                // validate: function (email) {
-                //     valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-
-                //     if (valid) {
-                //         return true;
-                //     } else {
-                //         console.log("Please enter a valid email address.");
-                //         return false;
-                //     }
-                // }
+                name: 'email'
             },
             {
                 type: 'input',
@@ -202,43 +147,17 @@ async function init() {
             {
                 type: 'input',
                 message: "What is the name of the employee you'd like to place in the team portal?",
-                name: 'employeeName',
-                // validate: (answer) => {
-                //     valid = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/.test(answer)
-                //     if (!valid) {
-                //         return console.log(" *Name input cannot contain any numbers or symbols. Try again.*")
-                //     }
-                //     return true;
-                // }
+                name: 'employeeName' 
             },
             {
                 type: 'input',
                 message: 'What is your employee\'s id number?',
-                name: 'id',
-                // validate: (answer) => {
-                //     valid = /^[0-9]+$/.test(answer)
-                //     if (!valid) {
-                //         return console.log(" *Input must be a number. Try again.*")
-                //     }
-                //     return true;
-                // }
+                name: 'id'
             },
             {
                 type: 'input',
                 message: 'What is your employee\'s email address?',
-                name: 'email',
-                // default: () => { },
-                // validate: function (email) {
-                //     valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
-
-                //     if (valid) {
-                //         return true;
-                //     } else {
-                //         console.log("Please enter a valid email address.");
-                //         return false;
-                //     }
-                // },
-
+                name: 'email'
             },
             {
                 type: 'input',
