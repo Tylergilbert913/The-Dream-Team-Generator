@@ -12,6 +12,8 @@ This a command-line functioning application that takes in information about empl
 
 ## Walkthrough Video
 
+ * ![Screenshot (249)](https://user-images.githubusercontent.com/73138234/119576750-59d07380-bd87-11eb-9583-ddd33f789649.png)
+
 https://youtu.be/Wj4vkpVT3B4
 
 ## Table of Contents
