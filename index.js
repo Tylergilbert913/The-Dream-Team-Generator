@@ -12,7 +12,7 @@ const Intern = require("./lib/intern.js");
 
 async function init() {
 
-    let teamProfileTemplate = "";
+    let teamProfile = "";
 
     
     let name;
@@ -63,10 +63,10 @@ async function init() {
         const manager = new Manager(name, id, email, officeNum);
 
         
-        employeeTemplate = fs.readFileSync("./templates/manager.html");
+        employeeTemp = fs.readFileSync("./templates/manager.html");
 
         
-        teamProfileTemplate += "\n" + eval("`" + employeeTemplate + "`");
+        teamProfile += "\n" + eval("`" + employeeTemp + "`");
         console.log("Manager profile successfully created.")
 
         
@@ -133,9 +133,9 @@ async function init() {
             let engineer = new Engineer(name, id, email, github);
 
             
-            employeeTemplate = fs.readFileSync("./templates/engineer.html");
+            employeeTemp = fs.readFileSync("./templates/engineer.html");
 
-            teamProfileTemplate += "\n" + eval("`" + employeeTemplate + "`")
+            teamProfile += "\n" + eval("`" + employeeTemp + "`")
             console.log("Engineer profile successfully created.")
 
             return menuPrompt();
@@ -177,9 +177,9 @@ async function init() {
             let intern = new Intern(name, id, email, school);
 
             
-            employeeTemplate = fs.readFileSync("./templates/intern.html");
+            employeeTemp = fs.readFileSync("./templates/intern.html");
 
-            teamProfileTemplate += eval("`" + employeeTemplate + "`")
+            teamProfile += eval("`" + employeeTemp + "`")
             console.log("Intern profile successfully created.")
 
             
@@ -191,10 +191,10 @@ async function init() {
     const generateFinalPage = fs.readFileSync("./templates/generate.html");
 
     
-    teamProfileTemplate = eval("`" + generateFinalPage + "`");
+    teamProfile = eval("`" + generateFinalPage + "`");
 
     
-    writeFileAsync("./html/index.html", teamProfileTemplate);
+    writeFileAsync("./html/index.html", teamProfile);
     console.log("Team profile page successfully created!")
 }
 
