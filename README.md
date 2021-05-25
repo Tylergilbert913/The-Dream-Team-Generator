@@ -8,7 +8,7 @@ https://opensource.org/licenses/MIT
     
 ## Description 
     
-This a command-line functioning application that takes in information about employees, wether their the manager, engineers or interns. It will generate an html page that presents cards to the user for each of the employees.
+This a command-line functioning application that takes in information about employees, wether they are the manager, engineers or interns. It will generate an html page that presents cards to the user for each of the employees.
 
 ## Walkthrough Video
 
