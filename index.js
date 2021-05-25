@@ -4,9 +4,9 @@ const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile); 
 
 
-const Manager = require("./lib/manager");
-const Engineer = require("./lib/engineer");
-const Intern = require("./lib/intern");
+const Manager = require("./lib/manager.js");
+const Engineer = require("./lib/engineer.js");
+const Intern = require("./lib/intern.js");
 
 
 
@@ -33,7 +33,7 @@ async function init() {
         {
             type: 'input',
             message: "Please enter the team manager's full name.",
-            name: 'employee'
+            name: 'employeeName'
         },
         {
             type: 'input',
