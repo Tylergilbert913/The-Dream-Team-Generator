@@ -177,7 +177,7 @@ async function init() {
             let intern = new Intern(employeeName, id, email, school);
 
             
-            employeeTemplate = fs.readFileSync("./src/intern.html");
+            employeeTemplate = fs.readFileSync("./templates/intern.html");
 
             teamProfileTemplate += eval("`" + employeeTemplate + "`")
             console.log("Intern profile successfully created.")
