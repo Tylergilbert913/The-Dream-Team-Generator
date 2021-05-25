@@ -15,7 +15,7 @@ async function init() {
     let teamProfileTemplate = "";
 
     
-    let employeeName;
+    let name;
     let id;
     let email;
     let officeNum;
@@ -33,7 +33,7 @@ async function init() {
         {
             type: 'input',
             message: "Please enter the team manager's full name.",
-            name: 'employeeName'
+            name: 'name'
         },
         {
             type: 'input',
@@ -53,14 +53,14 @@ async function init() {
     ]).then((response) => {
 
        
-        employeeName = response.employeeName;
+        name = response.name;
         id = response.id;
         email = response.email;
         role = response.role;
         officeNum = response.officeNum;
 
         
-        const manager = new Manager(employeeName, id, email, officeNum);
+        const manager = new Manager(name, id, email, officeNum);
 
         
         employeeTemplate = fs.readFileSync("./templates/manager.html");
@@ -105,7 +105,7 @@ async function init() {
             {
                 type: 'input',
                 message: "What is the name of the employee you'd like to place in the team portal?",
-                name: 'employeeName'    
+                name: 'name'    
             },
             {
                 type: 'input',
@@ -123,14 +123,14 @@ async function init() {
                 name: 'github'
             }
         ]).then((response) => { 
-            employeeName = response.employeeName;
+            name = response.name;
             id = response.id;
             email = response.email;
             role = response.role;
             github = response.github;
 
             
-            let engineer = new Engineer(employeeName, id, email, github);
+            let engineer = new Engineer(name, id, email, github);
 
             
             employeeTemplate = fs.readFileSync("./templates/engineer.html");
@@ -147,7 +147,7 @@ async function init() {
             {
                 type: 'input',
                 message: "What is the name of the employee you'd like to place in the team portal?",
-                name: 'employeeName' 
+                name: 'name' 
             },
             {
                 type: 'input',
@@ -167,14 +167,14 @@ async function init() {
             
         ]).then((response) => {
 
-            employeeName = response.employeeName;
+            name = response.name;
             id = response.id;
             email = response.email;
             role = response.role;
             school = response.school;
 
             
-            let intern = new Intern(employeeName, id, email, school);
+            let intern = new Intern(name, id, email, school);
 
             
             employeeTemplate = fs.readFileSync("./templates/intern.html");
