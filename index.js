@@ -82,13 +82,13 @@ async function init() {
                 name: 'role',
                 choices: ["Engineer", "Intern", "Finished Building Team"]
             }
-        ]).then((menuAnswer) => {
+        ]).then((menuResponse) => {
 
-            if (menuAnswer.role === "Engineer") {
+            if (menuResponse.role === "Engineer") {
                 console.log("Creating Engineer Profile...")
                 
                 return addEngineerPrompt();
-            } else if (menuAnswer.role === "Intern") {
+            } else if (menuResponse.role === "Intern") {
                 console.log("Creating Intern Profile...")
                 
                 return addInternPrompt();

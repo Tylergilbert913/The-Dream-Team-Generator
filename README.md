@@ -1,3 +1,5 @@
+
+    
 # The Dream Team Generator
     
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -6,14 +8,12 @@ https://opensource.org/licenses/MIT
     
 ## Description 
     
-This template was created for the user to input information, using the terminal, then the information given wil render into different cards, depending on wether you're an Intern or and Engineer.
+This a command-line functioning application that takes in information about employees, wether their the manager, engineers or interns. It will generate an html page that presents cards to the user for each of the employees.
 
-Also, I was not able to get this working. I tried so many differnet routes, but in the end, I was unsuccesful. I was able to complete all my test succesfully, though.
+## Walkthrough Video
 
-This is a link to a video showing my Team-Profile-Generator:
+https://youtu.be/Wj4vkpVT3B4
 
-https://drive.google.com/file/d/1f-24NygM_1GW_matVSJ1O5Rp4cEkhjlr/view
-    
 ## Table of Contents
     
 * [Installation](#installation)
@@ -28,19 +28,19 @@ https://drive.google.com/file/d/1f-24NygM_1GW_matVSJ1O5Rp4cEkhjlr/view
     
 ## Installation Instructions
     
-NPM install
+npm i 
     
 ## Usage Information 
     
-The user will answer all questions accordingly. This will then determine which prompts they will be presented with and what will populate within the cards.
+You'll want to make sure node is installed
     
 ## Contributors 
     
-Alaina Hicks
+NONE
     
 ## Testing Instructions 
     
-NPM run test
+npm run test
     
 ## License
     
@@ -52,5 +52,5 @@ https://github.com/Tylergilbert913
     
 ## Email
     
-Tyler.gilbert913@gmail.com
+tyler.gilbert913@gmail.com
     
